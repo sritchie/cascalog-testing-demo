@@ -1,4 +1,4 @@
-This project contains examples of the right way to test Cascalog workflows using [midje-cascalog](https://github.com/sritchie/midje-cascalog). The tests and code mirror the discussion at [this blog post](http://sritchie.github.com/2011/09/30/testing-cascalog-with-midje.html).
+This project contains examples of the right way to test Cascalog workflows using [midje-cascalog](https://github.com/sritchie/midje-cascalog). The tests and code mirror the discussion at [this blog post](http://sritchie.github.com/2011/09/30/testing-cascalog-with-midje.html). All tests can be found [here](https://github.com/sritchie/cascalog-testing-demo/blob/master/test/cascalog/testing_demo/core_test.clj).
 
 ## Excerpt
 
