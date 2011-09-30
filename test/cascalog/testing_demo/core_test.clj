@@ -4,7 +4,8 @@
         [midje sweet cascalog])
   (:require [cascalog.ops :as c]))
 
-;; From (link to blog post)
+;; Test from
+;; http://sritchie.github.com/2011/09/29/getting-creative-with-mapreduce.html
 (fact?- "Query should return a single tuple containing
         [most-popular-user, follower-count]."
         [["richhickey" 2961]]
@@ -13,7 +14,9 @@
           (complex-subquery :path) => [["sritchie09" 180]
                                        ["richhickey" 2961]]))
 
-;; # fact?-
+;; # Midje-Cascalog Testing Operators
+;;
+;; ## fact?-
 ;;
 ;; Let's begin by defining a function to test:
 
