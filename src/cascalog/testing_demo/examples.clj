@@ -7,5 +7,5 @@
 
 (defn max-followers-query [datastore-path]
   (let [src (name-vars (complex-subquery datastore-path)
-                       ["?user" "?followers"])]
-    (c/first-n src 1 :sort ["?followers"] :reverse true)))
+                       ["?user" "?follower-count"])]
+    (cascalog.ops/first-n src 1 :sort ["?follower-count"] :reverse true)))
