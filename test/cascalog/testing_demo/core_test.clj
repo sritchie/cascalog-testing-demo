@@ -169,8 +169,8 @@
 ;; To add =midje-cascalog= support to your own project, add these
 ;; entries to to the =:dev-dependencies= vector within =project.clj=:
 ;;
-;;  [lein-midje "1.0.3"]
-;;  [midje-cascalog "0.2.1"]
+;;  [lein-midje "1.0.7"]
+;;  [midje-cascalog "0.3.1"]
 ;;
 ;; ## Testing WordCount
 ;;
