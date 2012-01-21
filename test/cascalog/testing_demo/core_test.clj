@@ -41,12 +41,14 @@
 ;; The query returned by `(mk-inc-query [[1]])`,
 ;; when executed,
 ;; returns a single tuple: `[1 2]`
+
 (fact?- [[1 2]]
         (mk-inc-query [[1]])) ;; fact is true!
 
 ;; The query returned by `(mk-inc-query [[1] [10]])`,
 ;; When executed,
 ;; returns two tuples: `[10 11]` and `[1 2]`
+
 (fact?- [[10 11]
          [1 2]]
         (mk-inc-query [[1] [10]])) ;; fact is true!
@@ -56,12 +58,14 @@
 ;; The query returned by (mk-inc-query [[1]]),
 ;; when executed,
 ;; returns a single tuple: ["fail!" 10].
+
 (fact?- [["fail!" 10]]
         (mk-inc-query [[1]])) ;; fact is FALSE!
 
 ;; =fact?-= can take multiples pairs of result-tuples and queries:
 ;;
 ;; Same as two true facts above.
+
 (fact?- [[1 2]]
         (mk-inc-query [[1]])
         
@@ -70,6 +74,7 @@
 
 ;; Strings are ignored wherever they appear, so feel free to pepper
 ;;your facts with comments.
+
 (fact?- "These results:"
         [[1 2]]
         
@@ -188,6 +193,7 @@
 ;;
 ;; /path/to/textfile points to a textfile with a single line:
 ;; "another another word"
+
 (fact?- "wc-query should count words from all lines of text at
           /path/to/textfile."
         [["word" 1] ["another" 2]]
@@ -203,7 +209,9 @@
 ;; The fact depends on the correctness of =hfs-textline=. if
 ;; =hfs-textline= fails, our fact fails.
 ;;
-;; *Testing wc-query in isolation is difficult!* How can one test the logic of =wc-query-= without regard to how lines of text are stored?
+;; *Testing wc-query in isolation is difficult!* How can one test the
+;; *logic of =wc-query-= without regard to how lines of text are
+;; *stored?
 
 ;; ## Mocking with Midje
 ;;
@@ -243,12 +251,14 @@
 ;; when =wc-query= is called with =:text-path=
 ;; it will produce =short-sentences=,
 ;; provided =(hfs-textline :text-path)= produces =short-wordcounts=.
+
 (fact?- short-wordcounts (wc-query :text-path)
         (provided
           (hfs-textline :text-path) => short-sentences))
 
 ;; A =provided= form only applies to the result-query pair directly
 ;; above. The first fact is false, while the second fact is true:
+
 (let [sentence [["two words"]]
       results  [["two" 1] ["words" 1]]]
   (fact?- "provided form won't apply here!"
@@ -269,6 +279,7 @@
 ;;
 ;; These facts about =wc-query= from above are all true, and
 ;; identical:
+
 (fact?- "Mocking with keywords,"
         [["one" 1]] (wc-query :path)
         (provided (hfs-textline :path) => [["one"]])
@@ -351,15 +362,15 @@
 ;; =<word, count>= pairs for a moderate number of input
 ;; sentences. Facts like this are overwhelming:
 
-  (fact?- [["Ishmael." 1]
-           ["Some" 1]
-           ["a" 1]
-           ["about" 1]
-           ["ago" 1]
-           ;; and on and on...
-           ]
-          (wc-query :path)
-          (provided (hfs-textline :path) => longer-sentences))
+(fact?- [["Ishmael." 1]
+         ["Some" 1]
+         ["a" 1]
+         ["about" 1]
+         ["ago" 1]
+         ;; and on and on...
+         ]
+        (wc-query :path)
+        (provided (hfs-textline :path) => longer-sentences))
 
 ;; To solve this, Midje provides a number of collection checkers that
 ;; provide you with finer control over how queries are compared with
@@ -370,6 +381,7 @@
 ;; =just= is the default checker for =fact?-= and =fact?<-=; bare
 ;; vectors of tuples resolve to =(just result-vec :in-any-order)=. The
 ;; following three facts are equivalent:
+
 (let [src   [[1] [2]]
       query (<- [?a ?b]
                 (src ?a)
@@ -401,6 +413,7 @@
 ;;
 ;; These restrictions are quite limiting for most Cascalog
 ;; queries. The following two facts avoid both restrictions:
+
 (fact?- (contains #{["sail" 1] ["Ishmael." 1]} :gaps-ok)
         (wc-query :path) ;; true
           
